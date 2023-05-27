@@ -28,7 +28,7 @@
 		<module>gateway-service</module>
 		<module>customer-command-service</module>
 		<module>customer-query-service</module>
-		<module>app-domain</module>
+		<module>app-common-domain</module>
 		<module>audit-service</module>
 	</modules>
 

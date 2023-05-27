@@ -9,7 +9,7 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>app-domain</artifactId>
+    <artifactId>app-common-domain</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
