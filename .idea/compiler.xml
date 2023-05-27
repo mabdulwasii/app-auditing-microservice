@@ -2,12 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="app-common-domain" />
         <module name="customer-query-service" />
-        <module name="app-domain" />
         <module name="audit-service" />
         <module name="gateway-service" />
         <module name="customer-command-service" />
@@ -31,7 +32,7 @@
       <module name="account-command-service (1)" options="-parameters" />
       <module name="account-command-service (2)" options="-parameters" />
       <module name="account-query-service" options="-parameters" />
-      <module name="app-domain" options="-parameters" />
+      <module name="app-common-domain" options="-parameters" />
       <module name="audit-service" options="-parameters" />
       <module name="customer-command-service" options="-parameters" />
       <module name="customer-command-service (1)" options="-parameters" />

@@ -3,7 +3,7 @@ server:
   
 spring:
   application:
-    name: customer-service
+    name: customer-query-service
   data:
     mongodb:
       uri: mongodb://localhost:27018/customer

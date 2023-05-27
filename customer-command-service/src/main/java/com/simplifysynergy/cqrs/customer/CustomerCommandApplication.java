@@ -9,10 +9,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class CustomerApplication {
+public class CustomerCommandApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CustomerApplication.class, args);
+		SpringApplication.run(CustomerCommandApplication.class, args);
 	}
 
 	@Bean

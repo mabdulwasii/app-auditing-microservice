@@ -3,7 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/account-command-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/account-query-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app-common-domain/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/audit-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-command-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-query-service/src/main/java" charset="UTF-8" />
