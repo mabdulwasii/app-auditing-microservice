@@ -1,0 +1,59 @@
+server:
+  port: 8090
+    
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+              
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: account-command-service
+        uri: lb://account-command-service
+        predicates:
+        - Path=/account/**
+        - Method=POST,PUT,DELETE,PATCH
+        filters:
+        - RewritePath=/account/(?<path>.*), /$\{path}
+      - id: account-query-service
+        uri: lb://account-query-service
+        predicates:
+        - Path=/account/**
+        - Method=GET
+        filters:
+        - RewritePath=/account/(?<path>.*), /$\{path}
+      - id: customer-command-service
+        uri: lb://customer-command-service
+        predicates:
+        - Path=/customer/**
+        - Method=POST,PUT,DELETE,PATCH
+        filters:
+        - RewritePath=/customer/(?<path>.*), /$\{path}
+      - id: customer-query-service
+        uri: lb://customer-query-service
+        predicates:
+        - Path=/customer/**
+        - Method=GET
+        filters:
+        - RewritePath=/customer/(?<path>.*), /$\{path}
+      - id: audit-service
+        uri: lb://audit-service
+        predicates:
+          - Path=/audit/**
+        filters:
+          - RewritePath=/audit/(?<path>.*), /$\{path}
+  data:
+    mongodb:
+      uri: mongodb://localhost:27020/gateway

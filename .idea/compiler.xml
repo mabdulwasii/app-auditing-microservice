@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="customer-query-service" />
+        <module name="app-domain" />
+        <module name="audit-service" />
+        <module name="gateway-service" />
+        <module name="customer-command-service" />
+        <module name="account-command-service" />
+        <module name="discovery-service" />
+        <module name="account-query-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="account-command-service (1)" target="1.6" />
+      <module name="account-command-service (2)" target="19" />
+      <module name="customer-command-service (1)" target="19" />
+      <module name="customer-command-service (1) (com.simplifysynergy)" target="1.5" />
+      <module name="customer-command-service (2)" target="1.6" />
+      <module name="customer-command-service (2) (com.simplifysynergy.cqrs)" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-command-service" options="-parameters" />
+      <module name="account-command-service (1)" options="-parameters" />
+      <module name="account-command-service (2)" options="-parameters" />
+      <module name="account-query-service" options="-parameters" />
+      <module name="app-domain" options="-parameters" />
+      <module name="audit-service" options="-parameters" />
+      <module name="customer-command-service" options="-parameters" />
+      <module name="customer-command-service (1)" options="-parameters" />
+      <module name="customer-command-service (2)" options="-parameters" />
+      <module name="customer-command-service (2) (com.simplifysynergy.cqrs)" options="-parameters" />
+      <module name="customer-query-service" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+    </option>
+  </component>
+</project>

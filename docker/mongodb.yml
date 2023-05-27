@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  customer-mongodb:
+    image: mongo:4.4.15
+    ports:
+      - 127.0.0.1:27018:27017
+    # volumes:
+    #   - ~/volumes/princely/store/mongodb/:/customer/db/
+
+  account-mongodb:
+      image: mongo:4.4.15
+      ports:
+        - 127.0.0.1:27019:27017
+      # volumes:
+      #   - ~/volumes/princely/store/mongodb/:/account/db/
+
+  gateway-mongodb:
+        image: mongo:4.4.15
+        ports:
+          - 127.0.0.1:27020:27017
+        # volumes:
+        #   - ~/volumes/princely/store/mongodb/:/gateway/db/
+
+  audit-mongodb:
+    image: mongo:4.4.15
+    ports:
+      - 127.0.0.1:27021:27017
+    # volumes:
+    #   - ~/volumes/princely/store/mongodb/:/account/db/
