@@ -3,7 +3,7 @@ server:
   
 spring:
   application:
-    name: account-service
+    name: account-query-service
   data:
     mongodb:
       uri: mongodb://localhost:27019/account

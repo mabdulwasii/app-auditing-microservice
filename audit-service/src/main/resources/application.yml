@@ -1,9 +1,9 @@
 server:
-  port: 8088
+  port: 8099
   
 spring:
   application:
-    name: customer-service
+    name: audit-service
   data:
     mongodb:
       uri: mongodb://localhost:27018/customer
