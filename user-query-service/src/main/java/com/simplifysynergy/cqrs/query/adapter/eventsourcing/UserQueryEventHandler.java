@@ -27,7 +27,7 @@ public class UserQueryEventHandler {
 
     private final CountDownLatch latch = new CountDownLatch(3);
 
-    @KafkaListener(topics = "${app.topic.user}")
+    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}")
     public Mono<Void> consumeAuditEvent(ConsumerRecord<String, String> consumerRecord) {
         try {
             String message = consumerRecord.value();

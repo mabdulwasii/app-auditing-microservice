@@ -12,8 +12,3 @@ spring:
     bootstrapServers: localhost:9092
     groupId: group-id
     maxAttempts: 1
-
-app:
-  topic:
-    user: user-topic
-    group-id: user-query-service

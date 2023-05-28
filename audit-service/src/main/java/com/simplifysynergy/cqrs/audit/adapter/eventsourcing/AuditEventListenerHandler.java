@@ -29,7 +29,7 @@ public class AuditEventListenerHandler {
     private final ObjectMapper objectMapper;
     private final CountDownLatch latch = new CountDownLatch(3);
 
-    @KafkaListener(topics = "${app.topic.user}",  groupId = "${app.topic.group-id}")
+    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}")
     public Mono<Void> consumeAuditEvent(ConsumerRecord<String, String> consumerRecord) {
         try {
             String message = consumerRecord.value();
