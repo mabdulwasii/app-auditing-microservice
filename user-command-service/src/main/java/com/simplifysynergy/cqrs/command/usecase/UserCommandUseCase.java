@@ -3,9 +3,8 @@ package com.simplifysynergy.cqrs.command.usecase;
 import com.simplifysynergy.cqrs.command.adapter.eventsourcing.UserCommandEventHandler;
 import com.simplifysynergy.cqrs.command.usecase.port.UserCommandHandler;
 import com.simplifysynergy.cqrs.common.domain.User;
-import com.simplifysynergy.cqrs.common.event.UserCreateEvent;
-import com.simplifysynergy.cqrs.common.event.UserDeleteEvent;
-import com.simplifysynergy.cqrs.common.event.UserUpdateEvent;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.event.Event;
 import com.simplifysynergy.cqrs.common.util.UserMapper;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
@@ -34,7 +33,7 @@ public class UserCommandUseCase {
        return commandHandler.create(user)
                 .map(savedUser -> {
                     log.info("UserCommandUseCase::create saved user {}", savedUser);
-                    UserCreateEvent event = new UserCreateEvent(user);
+                    Event event = new Event(user, EventType.CREATE);
                     log.info("UserCommandUseCase::create event request created {}", event);
                     eventHandler.publishEvent(event);
                     return savedUser;
@@ -54,8 +53,8 @@ public class UserCommandUseCase {
                 }).flatMap(retrievedUser -> commandHandler.update(retrievedUser)
                         .map(updatedUser -> {
                             log.info("updatedUser:: {} ", updatedUser);
-                            UserUpdateEvent event = new UserUpdateEvent(updatedUser);
-                            log.info("UserUpdateEvent:: {} ", event);
+                            Event event = new Event(updatedUser, EventType.UPDATE);
+                            log.info("UserUpdateIEvent:: {} ", event);
                             eventHandler.publishEvent(event);
                             return updatedUser;
                         }));
@@ -65,7 +64,7 @@ public class UserCommandUseCase {
         log.info("UserCommandUseCase : delete {}", id);
         User user = new User();
         user.setId(id);
-        UserDeleteEvent event = new UserDeleteEvent(user);
+        Event event = new Event(user, EventType.DELETE);
 
         Mono<Void> voidMono = commandHandler.deleteById(id);
         eventHandler.publishEvent(event);

@@ -15,6 +15,11 @@ public class Event {
     private LocalDateTime modifiedDate = LocalDateTime.now();
     private String modifiedBy = "System";
 
+    public Event(User user, EventType type) {
+        this.user = user;
+        this.type = type;
+    }
+
     public LocalDateTime getModifiedDate() {
         if (EventType.UPDATE.equals(this.getType())) {
             return LocalDateTime.now();
