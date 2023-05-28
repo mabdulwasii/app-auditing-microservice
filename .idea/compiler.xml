@@ -7,23 +7,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="app-common-domain" />
-        <module name="customer-query-service" />
+        <module name="user-query-service" />
+        <module name="common" />
         <module name="audit-service" />
-        <module name="gateway-service" />
-        <module name="customer-command-service" />
-        <module name="account-command-service" />
+        <module name="user-command-service" />
         <module name="discovery-service" />
-        <module name="account-query-service" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="account-command-service" target="19" />
       <module name="account-command-service (1)" target="1.6" />
       <module name="account-command-service (2)" target="19" />
+      <module name="account-query-service" target="19" />
+      <module name="customer-command-service" target="19" />
       <module name="customer-command-service (1)" target="19" />
       <module name="customer-command-service (1) (com.simplifysynergy)" target="1.5" />
       <module name="customer-command-service (2)" target="1.6" />
       <module name="customer-command-service (2) (com.simplifysynergy.cqrs)" target="19" />
+      <module name="customer-query-service" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -32,15 +34,17 @@
       <module name="account-command-service (1)" options="-parameters" />
       <module name="account-command-service (2)" options="-parameters" />
       <module name="account-query-service" options="-parameters" />
-      <module name="app-common-domain" options="-parameters" />
       <module name="audit-service" options="-parameters" />
+      <module name="common" options="-parameters" />
       <module name="customer-command-service" options="-parameters" />
       <module name="customer-command-service (1)" options="-parameters" />
       <module name="customer-command-service (2)" options="-parameters" />
       <module name="customer-command-service (2) (com.simplifysynergy.cqrs)" options="-parameters" />
       <module name="customer-query-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
-      <module name="gateway-service" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="user-command-service" options="-parameters" />
+      <module name="user-query-service" options="-parameters" />
     </option>
   </component>
 </project>
