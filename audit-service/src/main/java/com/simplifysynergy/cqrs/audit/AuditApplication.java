@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.customer;
+package com.simplifysynergy.cqrs.audit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

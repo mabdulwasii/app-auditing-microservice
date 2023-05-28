@@ -1,6 +1,6 @@
-package com.simplifysynergy.cqrs.customer;
+package com.simplifysynergy.cqrs.audit;
 
-import com.simplifysynergy.cqrs.customer.model.Customer;
+import com.simplifysynergy.cqrs.audit.model.Customer;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
    properties = {"spring.cloud.discovery.enabled=false"})
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class CustomerControllerTests {
+class UserControllerTests {
 
     static String id;
 
@@ -39,7 +39,7 @@ class CustomerControllerTests {
     @Test
     @Order(1)
     void add() {
-        Customer customer = new Customer("Test1", "Test2", 10);
+        User customer = new User("Test1", "Test2", 10);
         customer = restTemplate.postForObject("/", customer, Customer.class);
         assertNotNull(customer);
         assertNotNull(customer.getId());
