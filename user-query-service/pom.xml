@@ -38,7 +38,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.simplifysynergy.cqrs</groupId>
-			<artifactId>app-common-domain</artifactId>
+			<artifactId>common</artifactId>
 			<version>0.1</version>
 		</dependency>
 		<dependency>
