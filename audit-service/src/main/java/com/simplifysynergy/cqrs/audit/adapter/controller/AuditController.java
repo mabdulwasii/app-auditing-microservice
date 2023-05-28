@@ -1,8 +1,8 @@
 package com.simplifysynergy.cqrs.audit.adapter.controller;
 
 import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
-import com.simplifysynergy.cqrs.entity.domain.Audit;
-import com.simplifysynergy.cqrs.entity.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

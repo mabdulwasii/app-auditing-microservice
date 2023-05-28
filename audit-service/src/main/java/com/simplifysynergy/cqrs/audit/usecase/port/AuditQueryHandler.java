@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.audit.usecase.port;
 
-import com.simplifysynergy.cqrs.entity.domain.Audit;
-import com.simplifysynergy.cqrs.entity.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -14,4 +14,6 @@ public interface AuditQueryHandler {
     Flux<Audit> findAuditByType(EventType type);
     Flux<Audit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end);
     Mono<Audit> save(Audit audit);
+    Mono<Void> deleteById(String uuid);
+    Mono<Audit> update(Audit audit);
 }

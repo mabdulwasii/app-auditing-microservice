@@ -1,8 +1,8 @@
 package com.simplifysynergy.cqrs.audit.adapter.repository;
 
 
-import com.simplifysynergy.cqrs.entity.domain.Audit;
-import com.simplifysynergy.cqrs.entity.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 

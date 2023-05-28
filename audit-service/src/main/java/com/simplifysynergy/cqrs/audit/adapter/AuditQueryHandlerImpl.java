@@ -2,8 +2,8 @@ package com.simplifysynergy.cqrs.audit.adapter;
 
 import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
-import com.simplifysynergy.cqrs.entity.domain.Audit;
-import com.simplifysynergy.cqrs.entity.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -46,6 +46,16 @@ public class AuditQueryHandlerImpl implements AuditQueryHandler {
 
     @Override
     public Mono<Audit> save(Audit audit) {
+        return repository.save(audit);
+    }
+
+    @Override
+    public Mono<Void> deleteById(String uuid) {
+        return repository.deleteById(uuid);
+    }
+
+    @Override
+    public Mono<Audit> update(Audit audit) {
         return repository.save(audit);
     }
 }

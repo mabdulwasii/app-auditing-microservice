@@ -1,8 +1,8 @@
 package com.simplifysynergy.cqrs.audit.usecase;
 
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
-import com.simplifysynergy.cqrs.entity.domain.Audit;
-import com.simplifysynergy.cqrs.entity.enumeration.EventType;
+import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -37,5 +37,13 @@ public class AuditUseCase {
 
     public Mono<Audit> save(Audit audit) {
         return queryHandler.save(audit);
+    }
+
+    public Mono<Void> deleteById(String uuid) {
+        return queryHandler.deleteById(uuid);
+    }
+
+    public Mono<Audit> update(Audit audit) {
+        return queryHandler.update(audit);
     }
 }

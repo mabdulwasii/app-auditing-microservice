@@ -7,3 +7,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27018/customer
+
+app:
+  topic:
+    audit: audit-topic
+    user: user-topic
