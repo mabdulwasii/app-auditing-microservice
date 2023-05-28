@@ -1,9 +1,0 @@
-server:
-  port: 8085
-  
-spring:
-  application:
-    name: account-command-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27019/account
