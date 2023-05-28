@@ -1,29 +1,26 @@
 package com.simplifysynergy.cqrs.common.event;
 
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-public interface Event {
-    default EventType getType() {
-        return EventType.CREATE;
-    }
+@Data
+public class Event {
+    private User user;
+    private EventType type;
+    private LocalDateTime createdDate = LocalDateTime.now();
+    private String createdBy = "System";
+    private LocalDateTime modifiedDate = LocalDateTime.now();
+    private String modifiedBy = "System";
 
-    default LocalDateTime getCreatedDate() {
-        return LocalDateTime.now();
-    }
-
-    default LocalDateTime getModifiedDate() {
+    public LocalDateTime getModifiedDate() {
         if (EventType.UPDATE.equals(this.getType())) {
             return LocalDateTime.now();
+        }else if (modifiedDate == null) {
+            return createdDate;
         }
         return null;
-    }
-
-    default String getCreatedBy() {
-        return "System";
-    }
-    default String getModifiedBy() {
-        return "System";
     }
 }

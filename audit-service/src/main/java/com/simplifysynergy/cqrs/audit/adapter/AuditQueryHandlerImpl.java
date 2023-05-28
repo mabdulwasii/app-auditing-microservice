@@ -49,14 +49,4 @@ public class AuditQueryHandlerImpl implements AuditQueryHandler {
         log.info("AuditQueryHandlerImpl::save attempting to save {} ", audit);
         return repository.save(audit);
     }
-
-    @Override
-    public Mono<Void> deleteById(String uuid) {
-        return repository.deleteById(uuid);
-    }
-
-    @Override
-    public Mono<Audit> update(Audit audit) {
-        return repository.save(audit);
-    }
 }

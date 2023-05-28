@@ -41,12 +41,4 @@ public class AuditUseCase {
         log.info("AuditQueryHandler::save attempting to save {} ", audit);
         return queryHandler.save(audit);
     }
-
-    public Mono<Void> deleteById(String uuid) {
-        return queryHandler.deleteById(uuid);
-    }
-
-    public Mono<Audit> update(Audit audit) {
-        return queryHandler.update(audit);
-    }
 }

@@ -14,6 +14,4 @@ public interface AuditQueryHandler {
     Flux<Audit> findAuditByType(EventType type);
     Flux<Audit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end);
     Mono<Audit> save(Audit audit);
-    Mono<Void> deleteById(String uuid);
-    Mono<Audit> update(Audit audit);
 }
