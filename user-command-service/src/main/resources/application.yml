@@ -3,11 +3,12 @@ server:
   
 spring:
   application:
-    name: customer-command-service
+    name: user-command-service
   data:
     mongodb:
-      uri: mongodb://localhost:27018/customer
-
-app:
-  topic:
-    user: user-topic
+      uri: mongodb://localhost:27020/user
+  kafka:
+    transferTopic: user_topics
+    bootstrapServers: localhost:9092
+    groupId: group-id
+    maxAttempts: 1

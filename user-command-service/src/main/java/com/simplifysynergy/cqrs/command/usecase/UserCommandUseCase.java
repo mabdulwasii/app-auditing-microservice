@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -23,9 +25,10 @@ public class UserCommandUseCase {
     private final UserCommandEventHandler eventHandler;
     public Mono<User> create(User user) {
         log.info("UserCommandUseCase : create {}", user);
-        if (StringUtils.isEmpty(user.getId())) {
+        if (!StringUtils.isEmpty(user.getId())) {
             throw new IllegalArgumentException("User must not have an id = " + user.getId());
         }
+        user.setId(UUID.randomUUID().toString());
         return commandHandler.create(user)
                 .map( savedUser -> {
                     UserCreateEvent event = new UserCreateEvent(user);

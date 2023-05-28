@@ -3,10 +3,15 @@ server:
   
 spring:
   application:
-    name: customer-query-service
+    name: user-query-service
   data:
     mongodb:
-      uri: mongodb://localhost:27018/customer
+      uri: mongodb://localhost:27021/user
+  kafka:
+    transferTopic: user_topics
+    bootstrapServers: localhost:9092
+    groupId: group-id
+    maxAttempts: 1
 
 app:
   topic:

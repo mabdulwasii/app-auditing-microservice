@@ -7,7 +7,13 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27018/customer
+  kafka:
+    transferTopic: user_topics
+    bootstrapServers: localhost:9092
+    groupId: group-id
+    maxAttempts: 1
 
 app:
   topic:
     user: user-topic
+    group-id: user-query-service
