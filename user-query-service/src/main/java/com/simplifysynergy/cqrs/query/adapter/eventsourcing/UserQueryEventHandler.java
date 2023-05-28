@@ -7,7 +7,6 @@ import com.simplifysynergy.cqrs.common.event.UserCreateEvent;
 import com.simplifysynergy.cqrs.common.event.UserDeleteEvent;
 import com.simplifysynergy.cqrs.common.event.UserUpdateEvent;
 import com.simplifysynergy.cqrs.query.usecase.UserQueryUseCase;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.KafkaException;
@@ -16,19 +15,22 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 @Component
 @Slf4j
-@AllArgsConstructor
 public class UserQueryEventHandler {
     private final ObjectMapper objectMapper;
     private final UserQueryUseCase useCase;
 
-    private final CountDownLatch latch = new CountDownLatch(3);
+    public UserQueryEventHandler(ObjectMapper objectMapper, UserQueryUseCase useCase) {
+        this.objectMapper = objectMapper;
+        this.useCase = useCase;
+    }
 
-    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}")
+    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}",
+            containerFactory = "kafkaListenerContainerFactory")
     public Mono<Void> consumeAuditEvent(ConsumerRecord<String, String> consumerRecord) {
+        log.info("Consuming audit event {} ", consumerRecord);
         try {
             String message = consumerRecord.value();
             Map<String, String> userEvent = new ObjectMapper().readValue(message, Map.class);
@@ -40,7 +42,6 @@ public class UserQueryEventHandler {
                 return useCase.save(user)
                         .mapNotNull(savedUser -> {
                             log.info("Save user {} in user readonly db", savedUser);
-                            latch.countDown();
                             return savedUser;
                         }).then();
             } else if (userEvent.get("type").equals(EventType.DELETE.name())) {
@@ -54,7 +55,6 @@ public class UserQueryEventHandler {
                 return useCase.update(user)
                         .map(updatedUser -> {
                             log.info("Updated user {} in user readonly db", updatedUser);
-                            latch.countDown();
                             return updatedUser;
                         }).then();
             }

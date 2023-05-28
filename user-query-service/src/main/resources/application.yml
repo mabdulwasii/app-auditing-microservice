@@ -6,13 +6,10 @@ spring:
     name: user-query-service
   data:
     mongodb:
-      uri: mongodb://localhost:27021/user
+      uri: mongodb://localhost:27021/user-query
+
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092
     groupId: group-id
     maxAttempts: 1
-
-app:
-  topic:
-    user: user-topic

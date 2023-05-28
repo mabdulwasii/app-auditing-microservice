@@ -1,6 +1,5 @@
 package com.simplifysynergy.cqrs.command.usecase;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.simplifysynergy.cqrs.command.adapter.eventsourcing.UserCommandEventHandler;
 import com.simplifysynergy.cqrs.command.usecase.port.UserCommandHandler;
 import com.simplifysynergy.cqrs.common.domain.User;
@@ -22,24 +21,24 @@ import java.util.UUID;
 public class UserCommandUseCase {
 
     private final UserCommandHandler commandHandler;
+
     private final UserCommandEventHandler eventHandler;
+
     public Mono<User> create(User user) {
         log.info("UserCommandUseCase : create {}", user);
         if (!StringUtils.isEmpty(user.getId())) {
             throw new IllegalArgumentException("User must not have an id = " + user.getId());
         }
         user.setId(UUID.randomUUID().toString());
-        return commandHandler.create(user)
-                .map( savedUser -> {
+        log.info("UserCommandUseCase : updated user {}", user);
+       return commandHandler.create(user)
+                .map(savedUser -> {
+                    log.info("UserCommandUseCase::create saved user {}", savedUser);
                     UserCreateEvent event = new UserCreateEvent(user);
-                    try {
-                        eventHandler.publishEvent(event);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
+                    log.info("UserCommandUseCase::create event request created {}", event);
+                    eventHandler.publishEvent(event);
                     return savedUser;
                 });
-
     }
 
     public Mono<User> update(User user) {
@@ -49,34 +48,27 @@ public class UserCommandUseCase {
         }
         return commandHandler.findById(user.getId())
                 .map(retrievedUser -> {
+                    log.info("findById::retrievedUser {} ->", retrievedUser);
                     UserMapper.mapToUser(retrievedUser, user);
-                    commandHandler.update(retrievedUser)
-                            .map(updatedUser -> {
-                                UserUpdateEvent event = new UserUpdateEvent(user);
-                                try {
-                                    eventHandler.publishEvent(event);
-                                } catch (JsonProcessingException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                return updatedUser;
-                            });
                     return retrievedUser;
-                });
+                }).flatMap(retrievedUser -> commandHandler.update(retrievedUser)
+                        .map(updatedUser -> {
+                            log.info("updatedUser:: {} ", updatedUser);
+                            UserUpdateEvent event = new UserUpdateEvent(updatedUser);
+                            log.info("UserUpdateEvent:: {} ", event);
+                            eventHandler.publishEvent(event);
+                            return updatedUser;
+                        }));
     }
 
     public Mono<Void> delete(String id) {
         log.info("UserCommandUseCase : delete {}", id);
-        return commandHandler.deleteById(id)
-                .mapNotNull(unused -> {
-                    User user = new User();
-                    user.setId(id);
-                    UserDeleteEvent event = new UserDeleteEvent(user);
-                    try {
-                        eventHandler.publishEvent(event);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return unused;
-                }).then();
+        User user = new User();
+        user.setId(id);
+        UserDeleteEvent event = new UserDeleteEvent(user);
+
+        Mono<Void> voidMono = commandHandler.deleteById(id);
+        eventHandler.publishEvent(event);
+        return voidMono;
     }
 }

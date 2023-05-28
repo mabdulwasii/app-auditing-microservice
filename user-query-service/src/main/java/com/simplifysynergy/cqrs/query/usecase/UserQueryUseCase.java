@@ -26,6 +26,7 @@ public class UserQueryUseCase {
     }
 
     public Mono<User> save(User user) {
+        log.info("UserQueryUseCase::save {} ", user);
         return userQueryHandler.save(user);
     }
 

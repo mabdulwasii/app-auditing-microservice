@@ -6,9 +6,9 @@ spring:
     name: audit-service
   data:
     mongodb:
-      uri: mongodb://localhost:27018/customer
+      uri: mongodb://localhost:27018/audit
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092
-    groupId: group-id
+    groupId: group_id_2
     maxAttempts: 1

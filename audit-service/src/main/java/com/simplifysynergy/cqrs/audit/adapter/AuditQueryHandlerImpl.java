@@ -46,6 +46,7 @@ public class AuditQueryHandlerImpl implements AuditQueryHandler {
 
     @Override
     public Mono<Audit> save(Audit audit) {
+        log.info("AuditQueryHandlerImpl::save attempting to save {} ", audit);
         return repository.save(audit);
     }
 

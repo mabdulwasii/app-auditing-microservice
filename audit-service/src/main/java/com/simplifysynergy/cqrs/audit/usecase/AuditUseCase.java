@@ -4,6 +4,7 @@ import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
 import com.simplifysynergy.cqrs.common.domain.Audit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AuditUseCase {
     private final AuditQueryHandler queryHandler;
 
@@ -36,6 +38,7 @@ public class AuditUseCase {
     }
 
     public Mono<Audit> save(Audit audit) {
+        log.info("AuditQueryHandler::save attempting to save {} ", audit);
         return queryHandler.save(audit);
     }
 

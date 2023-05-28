@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 @Component
 @Slf4j
@@ -27,10 +26,10 @@ public class AuditEventListenerHandler {
 
     private final AuditUseCase useCase;
     private final ObjectMapper objectMapper;
-    private final CountDownLatch latch = new CountDownLatch(3);
 
-    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}")
+    @KafkaListener(topics = "${spring.kafka.transferTopic}",  groupId = "${spring.kafka.groupId}", containerFactory = "kafkaListenerContainerFactory" )
     public Mono<Void> consumeAuditEvent(ConsumerRecord<String, String> consumerRecord) {
+        log.info("Consuming audit event {} ", consumerRecord);
         try {
             String message = consumerRecord.value();
             Map<String, String> userEvent = new ObjectMapper().readValue(message, Map.class);
@@ -38,18 +37,21 @@ public class AuditEventListenerHandler {
             if (userEvent.get("type").equals(EventType.CREATE.name())) {
                 UserCreateEvent event = objectMapper.readValue(message, UserCreateEvent.class);
                 User user = event.user();
+                log.info("consumeAuditEvent user {} ", user);
                 String payload = objectMapper.writeValueAsString(user);
 
                 Audit audit = AuditMapper.mapUserToAudit(payload, event);
+                log.info("consumeAuditEvent audit to save {} ", audit);
                 return useCase.save(audit)
                         .mapNotNull(savedAudit -> {
-                            log.info("Save audit {} in audit readonly db", savedAudit);
-                            latch.countDown();
+                            log.info("Saved audit {} in audit readonly db", savedAudit);
                             return savedAudit;
                         }).then();
             } else if (userEvent.get("type").equals(EventType.DELETE.name())) {
+
                 UserDeleteEvent userDeleteEvent = objectMapper.readValue(message, UserDeleteEvent.class);
                 User user = userDeleteEvent.user();
+                log.info("consumeAuditEvent audit id to to delete {} ", user);
                 return useCase.deleteById(user.getId());
             } else {
                 UserUpdateEvent event = objectMapper.readValue(message, UserUpdateEvent.class);
@@ -60,7 +62,6 @@ public class AuditEventListenerHandler {
                 return useCase.update(audit)
                         .map(updatedAudit -> {
                             log.info("Updated audit {} in audit readonly db", updatedAudit);
-                            latch.countDown();
                             return updatedAudit;
                         }).then();
             }

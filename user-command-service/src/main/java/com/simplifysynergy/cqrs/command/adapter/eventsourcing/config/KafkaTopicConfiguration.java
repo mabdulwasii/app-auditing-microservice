@@ -24,6 +24,6 @@ public class KafkaTopicConfiguration {
 
     @Bean
     public NewTopic transferTopic() {
-        return new NewTopic(properties.getTransferTopic(), 3, (short) 1);
+        return new NewTopic(properties.getTransferTopic(), 3, (short) 2);
     }
 }

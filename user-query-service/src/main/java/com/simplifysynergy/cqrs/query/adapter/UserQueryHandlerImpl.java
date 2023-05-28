@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @AllArgsConstructor
 public class UserQueryHandlerImpl implements UserQueryHandler {
-    private static UserQueryRepository repository;
+    private final UserQueryRepository repository;
 
     @Override
     public Mono<User> findById(String id) {
