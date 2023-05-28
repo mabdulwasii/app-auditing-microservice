@@ -20,28 +20,14 @@ spring:
         locator:
           enabled: true
       routes:
-      - id: account-command-service
-        uri: lb://account-command-service
-        predicates:
-        - Path=/account/**
-        - Method=POST,PUT,DELETE,PATCH
-        filters:
-        - RewritePath=/account/(?<path>.*), /$\{path}
-      - id: account-query-service
-        uri: lb://account-query-service
-        predicates:
-        - Path=/account/**
-        - Method=GET
-        filters:
-        - RewritePath=/account/(?<path>.*), /$\{path}
-      - id: customer-command-service
+      - id: user-command-service
         uri: lb://customer-command-service
         predicates:
         - Path=/customer/**
         - Method=POST,PUT,DELETE,PATCH
         filters:
         - RewritePath=/customer/(?<path>.*), /$\{path}
-      - id: customer-query-service
+      - id: user-query-service
         uri: lb://customer-query-service
         predicates:
         - Path=/customer/**
