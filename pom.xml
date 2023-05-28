@@ -22,12 +22,10 @@
 	</properties>
 
 	<modules>
-		<module>account-command-service</module>
-		<module>account-query-service</module>
 		<module>discovery-service</module>
 		<module>gateway-service</module>
-		<module>customer-command-service</module>
-		<module>customer-query-service</module>
+		<module>user-command-service</module>
+		<module>user-query-service</module>
 		<module>app-common-domain</module>
 		<module>audit-service</module>
 	</modules>
