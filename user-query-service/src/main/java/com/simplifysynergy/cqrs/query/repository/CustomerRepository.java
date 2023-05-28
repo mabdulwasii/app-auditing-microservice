@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.audit.repository;
+package com.simplifysynergy.cqrs.query.repository;
 
 import com.simplifysynergy.cqrs.entity.domain.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

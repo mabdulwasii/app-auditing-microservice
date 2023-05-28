@@ -1,6 +1,6 @@
-package com.simplifysynergy.cqrs.audit.controller;
+package com.simplifysynergy.cqrs.query.controller;
 
-import com.simplifysynergy.cqrs.audit.service.CustomerService;
+import com.simplifysynergy.cqrs.query.service.CustomerService;
 import com.simplifysynergy.cqrs.entity.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

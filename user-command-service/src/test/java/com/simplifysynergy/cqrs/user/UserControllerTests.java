@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.audit;
+package com.simplifysynergy.cqrs.user;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

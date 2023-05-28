@@ -1,7 +1,7 @@
-package com.simplifysynergy.cqrs.audit.controller;
+package com.simplifysynergy.cqrs.command.controller;
 
+import com.simplifysynergy.cqrs.command.service.UserService;
 import com.simplifysynergy.cqrs.entity.domain.User;
-import com.simplifysynergy.cqrs.audit.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +12,9 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 @RestController
 @Slf4j
-public class CustomerController {
+public class UserController {
 
-	private final CustomerService service;
+	private final UserService service;
 
 	@PostMapping("/")
 	public Mono<User> create(@RequestBody User user) {
