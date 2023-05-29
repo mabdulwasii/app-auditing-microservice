@@ -1,12 +1,17 @@
 package com.simplifysynergy.cqrs.common.event;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Event {
     private User user;
     private EventType type;

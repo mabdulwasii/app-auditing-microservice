@@ -2,7 +2,7 @@ package com.simplifysynergy.cqrs.audit.adapter;
 
 import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
-import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,33 +20,37 @@ public class AuditQueryHandlerImpl implements AuditQueryHandler {
     private final AuditRepository repository;
 
     @Override
-    public Flux<Audit> findAll() {
+    public Flux<UserAudit> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Mono<Audit> findAuditById(String uuid) {
+    public Mono<UserAudit> findAuditById(String uuid) {
         return repository.findById(uuid);
     }
 
     @Override
-    public Flux<Audit> findAuditBetween(LocalDateTime start, LocalDateTime end) {
+    public Flux<UserAudit> findAuditBetween(LocalDateTime start, LocalDateTime end) {
         return repository.findAllByCreatedDateBetween(start, end);
     }
 
     @Override
-    public Flux<Audit> findAuditByType(EventType type) {
+    public Flux<UserAudit> findAuditByType(EventType type) {
         return repository.findAllByType(type);
     }
 
     @Override
-    public Flux<Audit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end) {
+    public Flux<UserAudit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end) {
         return repository.findAllByTypeAndCreatedDateBetween(type, start, end);
     }
 
     @Override
-    public Mono<Audit> save(Audit audit) {
-        log.info("AuditQueryHandlerImpl::save attempting to save {} ", audit);
-        return repository.save(audit);
+    public Mono<UserAudit> save(UserAudit userAudit) {
+        log.info("AuditQueryHandlerImpl::save attempting to save {} ", userAudit);
+        return repository.save(userAudit)
+            .map(it -> {
+                log.info("AuditQueryHandlerImpl::saved successfully {} ", it);
+                return it;
+            });
     }
 }

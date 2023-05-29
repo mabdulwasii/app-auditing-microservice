@@ -4,9 +4,10 @@ server:
 spring:
   application:
     name: user-command-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27020/user
+  r2dbc:
+    url: r2dbc:h2:mem://./testdb
+    username: student
+    password:
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092

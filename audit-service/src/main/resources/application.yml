@@ -4,9 +4,10 @@ server:
 spring:
   application:
     name: audit-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27018/audit
+  r2dbc:
+    url: r2dbc:h2:mem://./testdb
+    username: student
+    password:
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092

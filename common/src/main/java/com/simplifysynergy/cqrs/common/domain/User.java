@@ -1,18 +1,21 @@
 package com.simplifysynergy.cqrs.common.domain;
 
 import com.simplifysynergy.cqrs.common.enumeration.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Document
+@Getter
+@Setter
+@ToString
+@Builder
+@Entity
+@Table("users")
 public class User {
 
 	@Id

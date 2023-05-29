@@ -1,6 +1,5 @@
 package com.simplifysynergy.cqrs.audit;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

@@ -4,10 +4,10 @@ server:
 spring:
   application:
     name: user-query-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27021/user-query
-
+  r2dbc:
+    url: r2dbc:h2:mem://./testdb
+    username: user
+    password:
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092

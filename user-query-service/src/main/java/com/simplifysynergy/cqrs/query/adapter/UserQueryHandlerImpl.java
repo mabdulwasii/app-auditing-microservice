@@ -1,7 +1,6 @@
 package com.simplifysynergy.cqrs.query.adapter;
 
-import com.simplifysynergy.cqrs.common.domain.User;
-import com.simplifysynergy.cqrs.query.adapter.repository.UserQueryRepository;
+import com.simplifysynergy.cqrs.query.adapter.repository.UserRepository;
 import com.simplifysynergy.cqrs.query.usecase.port.UserQueryHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @AllArgsConstructor
 public class UserQueryHandlerImpl implements UserQueryHandler {
-    private final UserQueryRepository repository;
+    private final UserRepository repository;
 
     @Override
     public Mono<User> findById(String id) {
@@ -31,7 +30,13 @@ public class UserQueryHandlerImpl implements UserQueryHandler {
     @Override
     public Mono<User> save(User user) {
         log.info("UserQueryHandlerImpl::save {} ", user);
-        return repository.save(user);
+        Mono<User> savedUserMono = repository.save(user);
+        savedUserMono.map(it -> {
+            log.info("UserQueryHandlerImpl::saved successfully {} ", it);
+            return it;
+        });
+
+        return savedUserMono;
     }
 
     @Override
@@ -43,6 +48,10 @@ public class UserQueryHandlerImpl implements UserQueryHandler {
     @Override
     public Mono<User> update(User user) {
         log.info("UserQueryHandlerImpl::update {} ", user);
-        return repository.save(user);
+        return repository.save(user)
+            .map(it -> {
+                log.info("UserQueryHandlerImpl::saved successfully {} ", it);
+                return it;
+            });
     }
 }

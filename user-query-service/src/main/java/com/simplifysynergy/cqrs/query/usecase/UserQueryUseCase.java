@@ -1,6 +1,5 @@
 package com.simplifysynergy.cqrs.query.usecase;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.query.usecase.port.UserQueryHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,11 @@ public class UserQueryUseCase {
 
     public Mono<User> save(User user) {
         log.info("UserQueryUseCase::save {} ", user);
-        return userQueryHandler.save(user);
+        return userQueryHandler.save(user)
+                .map(savedUser -> {
+                    log.info("UserQueryUseCase::saved user {} ", savedUser);
+                    return savedUser;
+                });
     }
 
     public Mono<Void> deleteById(String id) {

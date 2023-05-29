@@ -1,6 +1,5 @@
 package com.simplifysynergy.cqrs.common.util;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

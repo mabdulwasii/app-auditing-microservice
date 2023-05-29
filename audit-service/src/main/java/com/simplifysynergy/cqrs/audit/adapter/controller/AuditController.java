@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.audit.adapter.controller;
 
 import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
-import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,31 +23,31 @@ public class AuditController {
 	private final AuditUseCase useCase;
 
 	@GetMapping
-	public Flux<Audit> findAll() {
+	public Flux<UserAudit> findAll() {
 		log.info("AuditController: findAll");
 		return useCase.findAll();
 	}
 
 	@GetMapping("/{uuid}")
-	public Mono<Audit> findAuditById(@PathVariable String uuid) {
+	public Mono<UserAudit> findAuditById(@PathVariable String uuid) {
 		log.info("AuditController: findAuditById {}", uuid);
 		return useCase.findAuditById(uuid);
 	}
 
 	@GetMapping("/{start}/{end}")
-	public Flux<Audit> findAuditBetween(@PathVariable LocalDateTime start, @PathVariable LocalDateTime end) {
+	public Flux<UserAudit> findAuditBetween(@PathVariable LocalDateTime start, @PathVariable LocalDateTime end) {
 		log.info("AuditController: findAuditBetween {} , {}", start, end);
 		return useCase.findAuditBetween(start, end);
 	}
 
 	@GetMapping("/type/{type}")
-	public Flux<Audit> findAuditByType(@PathVariable EventType type) {
+	public Flux<UserAudit> findAuditByType(@PathVariable EventType type) {
 		log.info("AuditController: findAuditByType {} ", type);
 		return useCase.findAuditByType(type);
 	}
 
 	@GetMapping("/type/{type}/{start}/{end}")
-	public Flux<Audit> findAuditByTypeBetween(
+	public Flux<UserAudit> findAuditByTypeBetween(
 			@PathVariable EventType type,
 			@PathVariable LocalDateTime start,
 			@PathVariable LocalDateTime end

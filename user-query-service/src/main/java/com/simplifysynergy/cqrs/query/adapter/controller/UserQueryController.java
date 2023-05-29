@@ -1,7 +1,6 @@
 package com.simplifysynergy.cqrs.query.adapter.controller;
 
 import com.simplifysynergy.cqrs.query.usecase.UserQueryUseCase;
-import com.simplifysynergy.cqrs.common.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

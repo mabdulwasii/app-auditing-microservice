@@ -1,6 +1,5 @@
 package com.simplifysynergy.cqrs.command.usecase.port;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import reactor.core.publisher.Mono;
 
 public interface UserCommandHandler {

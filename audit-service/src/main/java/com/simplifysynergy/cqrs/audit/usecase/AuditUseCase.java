@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.audit.usecase;
 
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
-import com.simplifysynergy.cqrs.common.domain.Audit;
+import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,28 +17,32 @@ import java.time.LocalDateTime;
 public class AuditUseCase {
     private final AuditQueryHandler queryHandler;
 
-    public Flux<Audit> findAll() {
+    public Flux<UserAudit> findAll() {
         return queryHandler.findAll();
     }
 
-    public Mono<Audit> findAuditById(String uuid){
+    public Mono<UserAudit> findAuditById(String uuid){
         return queryHandler.findAuditById(uuid);
     }
 
-    public Flux<Audit> findAuditBetween(LocalDateTime start, LocalDateTime end){
+    public Flux<UserAudit> findAuditBetween(LocalDateTime start, LocalDateTime end){
         return queryHandler.findAuditBetween(start, end);
     }
 
-    public Flux<Audit> findAuditByType(EventType type) {
+    public Flux<UserAudit> findAuditByType(EventType type) {
         return queryHandler.findAuditByType(type);
     }
 
-    public Flux<Audit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end) {
+    public Flux<UserAudit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end) {
         return queryHandler.findAuditByTypeBetween(type, start, end);
     }
 
-    public Mono<Audit> save(Audit audit) {
-        log.info("AuditQueryHandler::save attempting to save {} ", audit);
-        return queryHandler.save(audit);
+    public Mono<UserAudit> save(UserAudit userAudit) {
+        log.info("AuditQueryHandler::save attempting to save {} ", userAudit);
+        return queryHandler.save(userAudit)
+                .map(savedAudit -> {
+                    log.info("AuditUseCase::saved UserAudit {} ", savedAudit);
+                    return savedAudit;
+                });
     }
 }

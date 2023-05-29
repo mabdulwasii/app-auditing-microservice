@@ -1,5 +1,6 @@
 package com.simplifysynergy.cqrs.command.adapter.eventsourcing.config;
 
+import com.simplifysynergy.cqrs.common.event.Event;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +18,12 @@ public class KafkaProducerConfiguration {
 
     private final KafkaConfigProperties properties;
 
-
     public KafkaProducerConfiguration(KafkaConfigProperties properties) {
         this.properties = properties;
     }
 
     @Bean
-    public ProducerFactory<String, String> kafkaProducerFactory() {
+    public ProducerFactory<String, Event> kafkaProducerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
@@ -35,7 +35,7 @@ public class KafkaProducerConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplateTemplate() {
+    public KafkaTemplate<String, Event> kafkaTemplate() {
         return new KafkaTemplate<>(kafkaProducerFactory());
     }
 
