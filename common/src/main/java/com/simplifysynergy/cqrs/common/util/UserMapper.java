@@ -1,20 +1,19 @@
 package com.simplifysynergy.cqrs.common.util;
 
-import lombok.extern.slf4j.Slf4j;
+import com.simplifysynergy.cqrs.common.domain.User;
 
-@Slf4j
 public class UserMapper {
-
-    private UserMapper() {}
+    private UserMapper() {
+    }
 
     public static User mapToUser(User original, User copy) {
-        original.setAge(copy.getAge());
         original.setGender(copy.getGender());
+        original.setAge(copy.getAge());
         original.setLastName(copy.getLastName());
         original.setFirstName(copy.getFirstName());
         original.setDateOfBirth(copy.getDateOfBirth());
-
-        log.info("Original {} is {}", original, copy);
         return original;
     }
+
 }
+

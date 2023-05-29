@@ -2,6 +2,7 @@ package com.simplifysynergy.cqrs.command.adapter;
 
 import com.simplifysynergy.cqrs.command.adapter.repository.UserRepository;
 import com.simplifysynergy.cqrs.command.usecase.port.UserCommandHandler;
+import com.simplifysynergy.cqrs.common.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

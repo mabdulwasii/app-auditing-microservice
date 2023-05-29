@@ -2,6 +2,7 @@ package com.simplifysynergy.cqrs.command.usecase;
 
 import com.simplifysynergy.cqrs.command.adapter.eventsourcing.UserCommandEventHandler;
 import com.simplifysynergy.cqrs.command.usecase.port.UserCommandHandler;
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import com.simplifysynergy.cqrs.common.event.Event;
 import com.simplifysynergy.cqrs.common.util.UserMapper;

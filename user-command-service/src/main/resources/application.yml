@@ -5,7 +5,7 @@ spring:
   application:
     name: user-command-service
   r2dbc:
-    url: r2dbc:h2:mem://./testdb
+    url: r2dbc:h2:mem://./user-write-db
     username: student
     password:
   kafka:

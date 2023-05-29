@@ -1,5 +1,6 @@
 package com.simplifysynergy.cqrs.query.adapter;
 
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.query.adapter.repository.UserRepository;
 import com.simplifysynergy.cqrs.query.usecase.port.UserQueryHandler;
 import lombok.AllArgsConstructor;

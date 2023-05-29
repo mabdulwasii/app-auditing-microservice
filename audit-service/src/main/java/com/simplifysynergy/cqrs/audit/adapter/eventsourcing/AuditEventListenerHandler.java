@@ -1,6 +1,7 @@
 package com.simplifysynergy.cqrs.audit.adapter.eventsourcing;
 
 import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.event.Event;
 import com.simplifysynergy.cqrs.common.util.AuditMapper;

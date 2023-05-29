@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user-query-service" />
+        <module name="userAudit-service" />
         <module name="common" />
-        <module name="audit-service" />
         <module name="user-command-service" />
         <module name="discovery-service" />
         <module name="gateway" />
@@ -20,6 +20,7 @@
       <module name="account-command-service (1)" target="1.6" />
       <module name="account-command-service (2)" target="19" />
       <module name="account-query-service" target="19" />
+      <module name="audit-service" target="19" />
       <module name="customer-command-service" target="19" />
       <module name="customer-command-service (1)" target="19" />
       <module name="customer-command-service (1) (com.simplifysynergy)" target="1.5" />
@@ -45,6 +46,7 @@
       <module name="gateway" options="-parameters" />
       <module name="user-command-service" options="-parameters" />
       <module name="user-query-service" options="-parameters" />
+      <module name="userAudit-service" options="-parameters" />
     </option>
   </component>
 </project>

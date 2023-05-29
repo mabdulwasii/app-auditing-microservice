@@ -1,5 +1,6 @@
 package com.simplifysynergy.cqrs.common.event;
 
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.simplifysynergy.cqrs.query.adapter.eventsourcing;
 
+import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.event.Event;
 import com.simplifysynergy.cqrs.query.usecase.UserQueryUseCase;
 import lombok.AllArgsConstructor;

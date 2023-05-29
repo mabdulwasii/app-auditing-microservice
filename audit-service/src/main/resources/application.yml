@@ -5,7 +5,7 @@ spring:
   application:
     name: audit-service
   r2dbc:
-    url: r2dbc:h2:mem://./testdb
+    url: r2dbc:h2:mem://./audit
     username: student
     password:
   kafka:

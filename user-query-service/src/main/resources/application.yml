@@ -5,7 +5,7 @@ spring:
   application:
     name: user-query-service
   r2dbc:
-    url: r2dbc:h2:mem://./testdb
+    url: r2dbc:h2:mem://./user-query-db
     username: user
     password:
   kafka:
