@@ -15,3 +15,10 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     depends_on:
       - zookeeper
+
+  user-mongodb:
+    image: mongo:4.4.15
+    ports:
+      - "127.0.0.1:27021:27017"
+    # volumes:
+    #   - ~/volumes/princely/store/mongodb/:/user/db/

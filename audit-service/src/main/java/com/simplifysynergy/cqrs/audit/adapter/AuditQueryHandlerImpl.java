@@ -4,7 +4,6 @@ import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
 import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -13,11 +12,14 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 
 @Component
-@AllArgsConstructor
 @Slf4j
 public class AuditQueryHandlerImpl implements AuditQueryHandler {
 
     private final AuditRepository repository;
+
+    public AuditQueryHandlerImpl(AuditRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Flux<UserAudit> findAll() {

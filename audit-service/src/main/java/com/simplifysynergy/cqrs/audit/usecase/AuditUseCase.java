@@ -36,13 +36,7 @@ public class AuditUseCase {
     public Flux<UserAudit> findAuditByTypeBetween(EventType type, LocalDateTime start, LocalDateTime end) {
         return queryHandler.findAuditByTypeBetween(type, start, end);
     }
-
-    public Mono<UserAudit> save(UserAudit userAudit) {
-        log.info("AuditQueryHandler::save attempting to save {} ", userAudit);
-        return queryHandler.save(userAudit)
-                .map(savedAudit -> {
-                    log.info("AuditUseCase::saved UserAudit {} ", savedAudit);
-                    return savedAudit;
-                });
+    public Mono<UserAudit> save(UserAudit userAudit){
+        return queryHandler.save(userAudit);
     }
 }

@@ -26,10 +26,5 @@ public class UserCommandController {
 		log.info("UserCommandController::create: {}", user);
 		return service.update(user);
 	}
-	@DeleteMapping("/{id}")
-	public Mono<Void> delete(@PathVariable String id) {
-		log.info("UserCommandController::delete: {}", id);
-		return service.delete(id);
-	}
 
 }

@@ -4,12 +4,14 @@ server:
 spring:
   application:
     name: user-command-service
-  r2dbc:
-    url: r2dbc:h2:mem://./user-write-db
-    username: student
-    password:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27021/user
   kafka:
     transferTopic: user_topics
     bootstrapServers: localhost:9092
     groupId: group-id
     maxAttempts: 1
+  h2:
+    console:
+      enabled: true

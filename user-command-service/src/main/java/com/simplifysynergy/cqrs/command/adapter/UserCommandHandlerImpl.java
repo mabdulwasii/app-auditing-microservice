@@ -28,11 +28,6 @@ public class UserCommandHandlerImpl implements UserCommandHandler {
     }
 
     @Override
-    public Mono<Void> deleteById(String id) {
-        log.info("Delete by Id {} ", id);
-        return repository.deleteById(id);
-    }
-    @Override
     public Mono<User> findById(String id) {
         log.info("UserCommandHandlerImpl::findById {} ", id);
         return repository.findById(id);

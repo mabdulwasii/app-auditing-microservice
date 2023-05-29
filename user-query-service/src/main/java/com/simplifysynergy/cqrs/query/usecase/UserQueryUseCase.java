@@ -30,11 +30,6 @@ public class UserQueryUseCase {
         return userQueryHandler.save(user);
     }
 
-    public Mono<Void> deleteById(String id) {
-        log.info("UserQueryUseCase::deleteById {} ", id);
-        return userQueryHandler.deleteById(id);
-    }
-
     public Mono<User> update(User user) {
         log.info("UserQueryUseCase::update {} ", user);
         return userQueryHandler.update(user);

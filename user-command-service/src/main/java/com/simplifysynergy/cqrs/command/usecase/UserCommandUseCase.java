@@ -5,7 +5,6 @@ import com.simplifysynergy.cqrs.command.domain.entity.User;
 import com.simplifysynergy.cqrs.command.domain.mapper.UserMapper;
 import com.simplifysynergy.cqrs.command.usecase.port.UserCommandHandler;
 import com.simplifysynergy.cqrs.common.Event;
-import com.simplifysynergy.cqrs.common.UserDto;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
@@ -59,16 +58,5 @@ public class UserCommandUseCase {
                             eventHandler.publishEvent(event);
                             return updatedUser;
                         }));
-    }
-
-    public Mono<Void> delete(String id) {
-        log.info("UserCommandUseCase : delete {}", id);
-        UserDto user = new UserDto();
-        user.setId(id);
-        Event event = new Event(user, EventType.DELETE);
-
-        Mono<Void> voidMono = commandHandler.deleteById(id);
-        eventHandler.publishEvent(event);
-        return voidMono;
     }
 }

@@ -25,21 +25,13 @@ spring:
         predicates:
         - Path=/user/**
         - Method=POST,PUT,DELETE,PATCH
-        filters:
-        - RewritePath=/user/(?<path>.*), /$\{path}
       - id: user-query-service
         uri: lb://user-query-service
         predicates:
         - Path=/user/**
         - Method=GET
-        filters:
-        - RewritePath=/user/(?<path>.*), /$\{path}
       - id: audit-service
         uri: lb://audit-service
         predicates:
           - Path=/audit/**
-        filters:
-          - RewritePath=/audit/(?<path>.*), /$\{path}
-  data:
-    mongodb:
-      uri: mongodb://localhost:27019/gateway
+          - Method=GET,POST,PUT,DELETE,PATCH

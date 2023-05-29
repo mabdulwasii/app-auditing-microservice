@@ -1,8 +1,12 @@
 package com.simplifysynergy.cqrs.audit.adapter.eventsourcing;
 
-import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.audit.domain.mapper.AuditMapper;
+import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
+;
 import com.simplifysynergy.cqrs.common.Event;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,13 +19,21 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class AuditEventListenerHandler {
 
-    private final AuditRepository repository;
+    private final AuditUseCase auditQueryUseCase;
+    private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "${spring.kafka.transferTopic}", groupId = "${spring.kafka.groupId}", containerFactory = "kafkaListenerContainerFactory")
     public Mono<UserAudit> consumeAuditEvent(Event event) {
         log.info("Consuming userAudit event {} ", event);
-            UserAudit userAudit = AuditMapper.mapUserToAudit(event);
+        objectMapper.registerModule(new Jdk8Module());
+        String payload;
+        try {
+            payload = objectMapper.writeValueAsString(event.getUserDto());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Could not parse event user" + e.getMessage(), e);
+        }
+        UserAudit userAudit = AuditMapper.mapUserToAudit(event, payload);
             log.info("consumeAuditEvent userAudit to save {} ", userAudit);
-            return repository.save(userAudit);
+            return auditQueryUseCase.save(userAudit);
     }
 }

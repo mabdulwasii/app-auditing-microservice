@@ -5,10 +5,7 @@ import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -54,5 +51,18 @@ public class AuditController {
 	) {
 		log.info("AuditController: findAuditByTypeBetween {}, {}, {} ", type, start, end);
 		return useCase.findAuditByTypeBetween(type, start, end);
+	}
+
+	@PostMapping
+	public Mono<UserAudit> createUserAudit(@RequestBody UserAudit userAudit) {
+		log.info("AuditController: createUserAudit {}", userAudit);
+		return useCase.save(userAudit);
+	}
+
+	@PutMapping
+	public Mono<UserAudit> updateUserAudit(@RequestBody UserAudit userAudit) {
+		log.info("AuditController: createUserAudit {}", userAudit);
+
+		return useCase.save(userAudit);
 	}
 }
