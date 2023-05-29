@@ -8,7 +8,7 @@
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>userAudit-service</artifactId>
+	<artifactId>audit-service</artifactId>
 
 	<properties>
 		<sonar.moduleKey>${project.artifactId}</sonar.moduleKey>

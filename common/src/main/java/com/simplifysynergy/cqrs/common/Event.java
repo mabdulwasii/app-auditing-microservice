@@ -1,6 +1,5 @@
-package com.simplifysynergy.cqrs.common.event;
+package com.simplifysynergy.cqrs.common;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,17 +13,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 public class Event {
-    private User user;
+    private UserDto userDto;
     private EventType type;
     private LocalDateTime createdDate = LocalDateTime.now();
     private String createdBy = "System";
     private LocalDateTime modifiedDate = LocalDateTime.now();
     private String modifiedBy = "System";
 
-    public Event(User user, EventType type) {
-        this.user = user;
-        this.type = type;
+    public Event(UserDto userDto, EventType eventType) {
+        this.userDto = userDto;
+        this.type = eventType;
     }
+
 
     public LocalDateTime getModifiedDate() {
         if (EventType.UPDATE.equals(this.getType())) {

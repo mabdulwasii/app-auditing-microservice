@@ -1,10 +1,9 @@
 package com.simplifysynergy.cqrs.audit.adapter.eventsourcing;
 
-import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
-import com.simplifysynergy.cqrs.common.domain.User;
-import com.simplifysynergy.cqrs.common.domain.UserAudit;
-import com.simplifysynergy.cqrs.common.event.Event;
-import com.simplifysynergy.cqrs.common.util.AuditMapper;
+import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
+import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
+import com.simplifysynergy.cqrs.audit.domain.mapper.AuditMapper;
+import com.simplifysynergy.cqrs.common.Event;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,19 +15,13 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class AuditEventListenerHandler {
 
-    private final AuditUseCase useCase;
+    private final AuditRepository repository;
 
     @KafkaListener(topics = "${spring.kafka.transferTopic}", groupId = "${spring.kafka.groupId}", containerFactory = "kafkaListenerContainerFactory")
-    public Mono<Void> consumeAuditEvent(Event event) {
+    public Mono<UserAudit> consumeAuditEvent(Event event) {
         log.info("Consuming userAudit event {} ", event);
-            User user = event.getUser();
-            log.info("consumeAuditEvent user {} ", user);
             UserAudit userAudit = AuditMapper.mapUserToAudit(event);
             log.info("consumeAuditEvent userAudit to save {} ", userAudit);
-            return useCase.save(userAudit)
-                .map(savedAudit -> {
-                    log.info("consumeAuditEvent::Saved userAudit {} in userAudit readonly db", savedAudit);
-                    return savedAudit;
-                }).then();
+            return repository.save(userAudit);
     }
 }

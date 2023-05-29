@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.audit.adapter.repository;
 
 
-import com.simplifysynergy.cqrs.common.domain.UserAudit;
+import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;

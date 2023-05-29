@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.command.adapter.controller;
 
+import com.simplifysynergy.cqrs.command.domain.entity.User;
 import com.simplifysynergy.cqrs.command.usecase.UserCommandUseCase;
-import com.simplifysynergy.cqrs.common.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

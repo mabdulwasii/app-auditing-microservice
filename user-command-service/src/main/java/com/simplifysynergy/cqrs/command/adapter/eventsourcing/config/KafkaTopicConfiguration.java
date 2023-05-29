@@ -5,6 +5,7 @@ import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
 
 import java.util.HashMap;
@@ -24,6 +25,6 @@ public class KafkaTopicConfiguration {
 
     @Bean
     public NewTopic transferTopic() {
-        return new NewTopic(properties.getTransferTopic(), 3, (short) 2);
+        return TopicBuilder.name(properties.getTransferTopic()).build();
     }
 }

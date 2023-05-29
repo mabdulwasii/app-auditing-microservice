@@ -1,6 +1,7 @@
 package com.simplifysynergy.cqrs.command.adapter.eventsourcing.config;
 
-import com.simplifysynergy.cqrs.common.event.Event;
+
+import com.simplifysynergy.cqrs.common.Event;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

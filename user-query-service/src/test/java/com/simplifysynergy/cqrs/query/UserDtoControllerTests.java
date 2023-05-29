@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.user;
+package com.simplifysynergy.cqrs.query;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -12,6 +12,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import pl.piomin.service.customer.model.Customer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
    properties = {"spring.cloud.discovery.enabled=false"})
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserCommandControllerTests {
+class UserDtoControllerTests {
 
     static String id;
 
@@ -38,26 +39,26 @@ class UserCommandControllerTests {
     @Test
     @Order(1)
     void add() {
-        User user = new User("Test1", "Test2", 10);
-        user = restTemplate.postForObject("/", user, User.class);
-        assertNotNull(user);
-        assertNotNull(user.getId());
-        id = user.getId();
+        Customer customer = new Customer("Test1", "Test2", 10);
+        customer = restTemplate.postForObject("/", customer, Customer.class);
+        assertNotNull(customer);
+        assertNotNull(customer.getId());
+        id = customer.getId();
     }
 
     @Test
     @Order(2)
     void findById() {
-        User user = restTemplate.getForObject("/{id}", User.class, id);
-        assertNotNull(user);
-        assertNotNull(user.getId());
-        assertEquals(id, user.getId());
+        Customer customer = restTemplate.getForObject("/{id}", Customer.class, id);
+        assertNotNull(customer);
+        assertNotNull(customer.getId());
+        assertEquals(id, customer.getId());
     }
 
     @Test
     @Order(2)
     void findAll() {
-        User[] users = restTemplate.getForObject("/", User[].class);
-        assertTrue(users.length > 0);
+        Customer[] customers = restTemplate.getForObject("/", Customer[].class);
+        assertTrue(customers.length > 0);
     }
 }

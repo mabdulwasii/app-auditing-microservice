@@ -1,11 +1,12 @@
 package com.simplifysynergy.cqrs.query.adapter.controller;
 
-import com.simplifysynergy.cqrs.common.domain.User;
+import com.simplifysynergy.cqrs.query.domain.entity.User;
 import com.simplifysynergy.cqrs.query.usecase.UserQueryUseCase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +14,7 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 @RestController
 @Slf4j
+@RequestMapping("/user")
 public class UserQueryController {
 
 	private final UserQueryUseCase service;
@@ -22,7 +24,7 @@ public class UserQueryController {
 		return service.findById(id);
 	}
 
-	@GetMapping("/")
+	@GetMapping()
 	public Flux<User> findAll() {
 		log.info("findAll");
 		return service.findAll();

@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.command.adapter.eventsourcing;
 
 import com.simplifysynergy.cqrs.command.adapter.eventsourcing.config.KafkaConfigProperties;
-import com.simplifysynergy.cqrs.common.event.Event;
+import com.simplifysynergy.cqrs.common.Event;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

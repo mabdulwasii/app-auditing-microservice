@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.audit;
+package com.simplifysynergy.cqrs.user;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
    properties = {"spring.cloud.discovery.enabled=false"})
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserControllerTests {
+class UserDtoCommandControllerTests {
 
     static String id;
 

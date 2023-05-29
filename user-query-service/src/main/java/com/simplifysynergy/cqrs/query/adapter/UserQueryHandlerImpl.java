@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.query.adapter;
 
-import com.simplifysynergy.cqrs.common.domain.User;
 import com.simplifysynergy.cqrs.query.adapter.repository.UserRepository;
+import com.simplifysynergy.cqrs.query.domain.entity.User;
 import com.simplifysynergy.cqrs.query.usecase.port.UserQueryHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class UserQueryHandlerImpl implements UserQueryHandler {
     @Override
     public Mono<User> findById(String id) {
         log.info("UserQueryHandlerImpl::findById(" + id + ")");
-        return repository.findById(id);
+         return repository.findById(id);
     }
 
     @Override
@@ -31,13 +31,7 @@ public class UserQueryHandlerImpl implements UserQueryHandler {
     @Override
     public Mono<User> save(User user) {
         log.info("UserQueryHandlerImpl::save {} ", user);
-        Mono<User> savedUserMono = repository.save(user);
-        savedUserMono.map(it -> {
-            log.info("UserQueryHandlerImpl::saved successfully {} ", it);
-            return it;
-        });
-
-        return savedUserMono;
+        return repository.save(user);
     }
 
     @Override

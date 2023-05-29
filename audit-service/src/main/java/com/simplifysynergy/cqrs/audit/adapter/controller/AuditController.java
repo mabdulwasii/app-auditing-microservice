@@ -1,7 +1,7 @@
 package com.simplifysynergy.cqrs.audit.adapter.controller;
 
+import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.audit.usecase.AuditUseCase;
-import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

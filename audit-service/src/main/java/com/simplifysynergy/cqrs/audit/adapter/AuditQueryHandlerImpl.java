@@ -1,8 +1,8 @@
 package com.simplifysynergy.cqrs.audit.adapter;
 
 import com.simplifysynergy.cqrs.audit.adapter.repository.AuditRepository;
+import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.audit.usecase.port.AuditQueryHandler;
-import com.simplifysynergy.cqrs.common.domain.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,10 +47,6 @@ public class AuditQueryHandlerImpl implements AuditQueryHandler {
     @Override
     public Mono<UserAudit> save(UserAudit userAudit) {
         log.info("AuditQueryHandlerImpl::save attempting to save {} ", userAudit);
-        return repository.save(userAudit)
-            .map(it -> {
-                log.info("AuditQueryHandlerImpl::saved successfully {} ", it);
-                return it;
-            });
+        return repository.save(userAudit);
     }
 }

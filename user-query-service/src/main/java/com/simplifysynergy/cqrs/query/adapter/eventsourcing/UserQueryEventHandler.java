@@ -1,8 +1,10 @@
 package com.simplifysynergy.cqrs.query.adapter.eventsourcing;
 
-import com.simplifysynergy.cqrs.common.domain.User;
-import com.simplifysynergy.cqrs.common.event.Event;
-import com.simplifysynergy.cqrs.query.usecase.UserQueryUseCase;
+
+import com.simplifysynergy.cqrs.common.Event;
+import com.simplifysynergy.cqrs.query.adapter.repository.UserRepository;
+import com.simplifysynergy.cqrs.query.domain.entity.User;
+import com.simplifysynergy.cqrs.query.domain.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,24 +16,24 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class UserQueryEventHandler {
 
-    private final UserQueryUseCase useCase;
+    private final UserRepository useCase;
 
-    @KafkaListener(topics = "${spring.kafka.transferTopic}", groupId = "${spring.kafka.groupId}", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "${spring.kafka.transferTopic}", groupId = "${spring.kafka.groupId}")
     public Mono<Void> consumeUserEvent(Event event) {
 
-        log.info("Consuming audit event {} ", event);
+        log.info("Consuming user event {} ", event);
 
-        User user = event.getUser();
+        User user = UserMapper.mapUserEntityToUserDto(event.getUserDto());
         switch (event.getType()) {
             case CREATE -> {
                 return useCase.save(user)
-                        .mapNotNull(savedUser -> {
+                        .map(savedUser -> {
                             log.info("consumeUserEvent::Save user {} in user readonly db", savedUser);
                             return savedUser;
                         }).then();
             }
             case UPDATE -> {
-                return useCase.update(user)
+                return useCase.save(user)
                         .map(updatedUser -> {
                             log.info("consumeUserEvent::Updated user {} in user readonly db", updatedUser);
                             return updatedUser;

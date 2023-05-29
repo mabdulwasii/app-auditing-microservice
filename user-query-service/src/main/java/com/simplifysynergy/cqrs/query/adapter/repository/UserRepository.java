@@ -1,6 +1,7 @@
 package com.simplifysynergy.cqrs.query.adapter.repository;
 
-import com.simplifysynergy.cqrs.common.domain.User;
+
+import com.simplifysynergy.cqrs.query.domain.entity.User;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
 

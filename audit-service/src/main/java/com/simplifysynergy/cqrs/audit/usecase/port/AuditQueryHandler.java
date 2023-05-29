@@ -1,6 +1,6 @@
 package com.simplifysynergy.cqrs.audit.usecase.port;
 
-import com.simplifysynergy.cqrs.common.domain.UserAudit;
+import com.simplifysynergy.cqrs.audit.domain.entity.UserAudit;
 import com.simplifysynergy.cqrs.common.enumeration.EventType;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

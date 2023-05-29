@@ -1,4 +1,4 @@
-package com.simplifysynergy.cqrs.common.domain;
+package com.simplifysynergy.cqrs.query.domain.entity;
 
 import com.simplifysynergy.cqrs.common.enumeration.Gender;
 import jakarta.persistence.Entity;
